@@ -1,0 +1,20 @@
+{
+    "env": {
+        "emsdkPath": "D:\\Development\\emsdk"
+    },
+    "configurations": [
+        {
+            "name": "wasm",
+            "includePath": [
+                "${emsdkPath}${pathSeparator}upstream${pathSeparator}emscripten${pathSeparator}**",
+                "${default}",
+                "${workspaceFolder}"
+            ],
+
+            "cStandard": "c17",
+            "cppStandard": "c++17"
+        }
+    ],
+
+    "version": 4
+}

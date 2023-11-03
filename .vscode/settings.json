@@ -1,0 +1,11 @@
+{
+    "cSpell.language": "en,pt-BR",
+    "licenser.disableAutoHeaderInsertion": true,
+    "prettier.tabWidth": 4,
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "editor.formatOnSave": true,
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google,  ColumnLimit: 0, IndentWidth: 4, TabWidth: 4}"
+}
