@@ -2,7 +2,7 @@
 
 This repo is a basic start template for using WebGPU with Emscripten and ImGUI. It provides all the necessary files (**excluding the Emscripten compiler**) to build a basic WASM graphics ready app.
 
-```bash
+```sh
 make          # Makes the .o files and Wasm
 
 make serve    # Starts the development server

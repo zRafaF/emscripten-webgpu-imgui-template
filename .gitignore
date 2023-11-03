@@ -1,3 +1,5 @@
 /build
+web/index.js
+web/index.wasm
 
 *.env

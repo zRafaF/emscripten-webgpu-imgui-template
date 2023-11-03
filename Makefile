@@ -4,13 +4,21 @@ WEB_DIR = web
 BUILD_DIR = ./build
 EXE = $(WEB_DIR)/index.js
 IMGUI_DIR = ./lib/imgui/
-SOURCES = main.cpp
-SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
-SOURCES += $(IMGUI_DIR)/backends/imgui_impl_glfw.cpp $(IMGUI_DIR)/backends/imgui_impl_wgpu.cpp
-OBJS = $(addprefix $(BUILD_DIR)/, $(addsuffix .o, $(basename $(notdir $(SOURCES)))))
+SRC_DIR = src
+INCLUDE_DIR = include
+
+# Find all .cpp files under src
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
+
+# Find all .cpp files under imgui and imgui/backends
+SOURCES += $(wildcard $(IMGUI_DIR)/*.cpp) $(wildcard $(IMGUI_DIR)/backends/*.cpp)
+
+# Find all .h files under include
+CPPFLAGS += -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends -I$(INCLUDE_DIR)
+
+OBJS = $(addprefix $(BUILD_DIR)/, $(addsuffix .o, $(notdir $(basename $(SOURCES)))))
+
 UNAME_S := $(shell uname -s)
-CPPFLAGS =
-LDFLAGS =
 EMS =
 
 ##---------------------------------------------------------------------
@@ -34,7 +42,6 @@ endif
 ## FINAL BUILD FLAGS
 ##---------------------------------------------------------------------
 
-CPPFLAGS += -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends
 CPPFLAGS += -Wall -Wformat -Os $(EMS)
 LDFLAGS += $(EMS)
 
@@ -42,7 +49,7 @@ LDFLAGS += $(EMS)
 ## BUILD RULES
 ##---------------------------------------------------------------------
 
-$(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)/%.o: $(IMGUI_DIR)/%.cpp | $(BUILD_DIR)
